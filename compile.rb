@@ -35,10 +35,10 @@ def find filename
   throw "Could not find file."
 end
 
-def partial filename
+def partial (filename,locals={})
   source = File.read(find(filename))
   engine = Haml::Engine.new(source)
-  engine.render(binding)
+  engine.render(binding,locals)
 end
 
 Sass.compile_file("sass/style.scss", "build/style.css")
