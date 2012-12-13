@@ -94,7 +94,7 @@ MOBILE TARGETING
     pointer-events: auto;
     cursor: default; } }
 body {
-  background: #000;
+  background: red;
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px; }
