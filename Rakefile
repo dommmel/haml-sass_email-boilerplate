@@ -72,7 +72,7 @@ end
 
 desc "Copy over image files"
 task :copy_images => "#{@target_folder}/images" do 
-  sh "rsync -ru #{@src_folder}/images/ #{@target_folder}/images"
+  sh "rsync -ru --delete #{@src_folder}/images/ #{@target_folder}/images/"
 end
 
 desc "Zip Assets"

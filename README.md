@@ -1,7 +1,7 @@
 haml-sass_email-boilerplate
 ===========================
 
-###Features
+### Features
 
 * Support for partials. Use in your haml file like so: ```%tr= partial("filename")```
 * All instance variables are available in sass too: ```background: variable(blue)```. So you can DRY up things like ```bgcolor```.
@@ -10,4 +10,8 @@ haml-sass_email-boilerplate
 
 * set the variables you want to share between haml and sass in ```settings.rb```
 * compile via ```rake```. This generates the html and css and copies over image files
-* bring styles inline
+* bring styles inline.
+
+### Watch for changes 
+
+run ```guard``` from the command line to automatically compile and build whenever you add or change a file.
