@@ -9,9 +9,5 @@ haml-sass_email-boilerplate
 ### How to use
 
 * set the variables you want to share between haml and sass in ```settings.rb```
-* compile via ```./compile.rb```. This generates the html, css as well as a zip-file containing the css and images.
+* compile via ```rake```. This generates the html and css and copies over image files
 * bring styles inline
-
-### Use with Campaignmonitor
-
-Upload ```index.html``` and ```assets.zip``` via the "import template" dialog and you should be set. Campaignmonitor will inline all the styles and host all refenrenced images. 
