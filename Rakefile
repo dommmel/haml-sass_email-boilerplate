@@ -9,7 +9,6 @@
 @input_filenames = ['images', "#{@stylesheet_filename}.css"]
 @assets_zipfile = "assets.zip"
 
-require "./#{@src_folder}/settings.rb"
 require 'haml'
 require 'sass'
 require 'zip/zip'
@@ -29,7 +28,11 @@ module VarAccessor
     Sass::Script::String.new(VarAccessor.variables()["#{value}".to_sym])
   end
 end
-VarAccessor.set  Hash[instance_variables.map { |name| [name.to_s.sub(/^@/,"").to_sym, instance_variable_get(name)] } ]
+
+def make_settings_accessible
+  load "./#{@src_folder}/settings.rb"
+  VarAccessor.set  Hash[instance_variables.map { |name| [name.to_s.sub(/^@/,"").to_sym, instance_variable_get(name)] } ]
+end
 
 # Try to locate a file
 def find filename
@@ -62,11 +65,13 @@ task :build => [:compile_sass,:compile_haml,:copy_images]
 
 desc "Compile sass to css"
 task :compile_sass => @target_folder do
+  make_settings_accessible
   Sass.compile_file("#{@sass_folder}/#{@stylesheet_filename}.scss", "#{@target_folder}/#{@stylesheet_filename}.css")
 end
 
 desc "Compile haml to html"
 task :compile_haml => @target_folder do
+  make_settings_accessible
   File.open("#{@target_folder}/#{@markup_filename}.html", 'w') {|f| f.write(partial "#{@haml_folder}/#{@markup_filename}.haml") }
 end
 
