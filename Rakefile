@@ -11,7 +11,7 @@
 
 require 'haml'
 require 'sass'
-require 'zip/zip'
+#require 'zip/zip'
 
 # Make all instance_variables (starting with @) availabe to sass
 module VarAccessor
@@ -81,12 +81,7 @@ task :copy_images => "#{@target_folder}/images" do
 end
 
 desc "Zip Assets"
-task :zip_assets => [:build] do
-  Zip.options[:on_exists_proc] = true #overwrite if exists
-  Zip.options[:continue_on_exists_proc] = true
-  Zip::ZipFile.open(@assets_zipfile, Zip::ZipFile::CREATE) do |zipfile|
-    @input_filenames.each do |filename|
-      zipfile.add(filename, @target_folder + '/' + filename)
-    end
-  end
+task :zip => [:build] do
+  puts "zipping"
+ `cd #{@target_folder} && zip -r #{@assets_zipfile} #{@input_filenames.join(" ")} && cd -`
 end
